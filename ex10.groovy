@@ -44,6 +44,7 @@ def duration = benchmark {
 	
 	println (primes)
 	println ("Solution is: ${sum}")
-	// => 1179908154
+	// => 1,179,908,154
+	// 142,913,828,922
 }
 println "Execution took ${duration} ms"
