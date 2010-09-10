@@ -4,14 +4,10 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 */
 
-// This seems like a slight rehash of exercise 7, but anyway: we use a sieve
-// of erasthonenes to generate primes until we exceed two million. Again, we
-// iterate up from 3 in steps of 2, check each number against the list of
-// previously encountered primes. If none are divisors, then its a prime, add
-// it to the list. Then add up the list.
-
-// This takes a couple of minutes - which may indicate how slow Groovy is or
-// that I've selected a suboptimal solution.
+// This is an alternative go at this question, due to the failure of my first
+// attempt. Here we use a dumb, brute force way of determing primes: false if
+// it's 1 or divisble by 2, true if it's 2 or 3, otherwise try to divide it
+// sucessively by every odd number from 3 upwards.
 
 def benchmark = { closure ->  
 	start = System.currentTimeMillis()  
@@ -21,35 +17,35 @@ def benchmark = { closure ->
 } 
 
 def is_prime (x) {
-	if (x <= 1) {
+	if ((x <= 1) || (x % 2 == 0)) {
 		return false
+	} else if ((x == 2) || (x == 3)) {
+		return true
 	} else {
-		c = 2
-		root = (int) Math.sqrt (c)
-		while (c < root) {
+		c = 3
+		root = Math.sqrt (x)
+		while (c <= root) {
 			if (x % c == 0)
 				return false
-			if (c != 2)
-				c += 2
-			else
-				c += 1	
+				c += 2	
 		}
 		return true
 	}
 }
- 
+
 def duration = benchmark {
 
 	long sum = 2
 	
-	for (i=3; i < 2000000; i += 2) {
+	for (i=3; i < 1000000; i += 2) {
 		if (is_prime (i)) {
 			sum += i
+			//println (i)
 		}
 	}
 
 	println ("Solution is: ${sum}")
-	// => 1,179,908,154
-	// 142,913,828,922
+	// => 142913828922
+	// time: 75466ms
 }
 println "Execution took ${duration} ms"
