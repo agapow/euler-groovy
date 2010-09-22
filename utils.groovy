@@ -2,6 +2,8 @@
 Assorted utilities for the Project Euler solutions.
 */
 
+package net.agapow.eulerutils
+
 /*
 Call a closure, print out execution time and return value.
 
