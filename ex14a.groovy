@@ -32,9 +32,9 @@ class CollatzGenerator {
 gen = new CollatzGenerator()
 max_len = 0
 max_idx = 0
-(1..1000000).each {
+(1..20).each {
 	chain_len = gen.chain_len(it)
-	if (it % 1000 == 0)
+	if (it % 1 == 0)
 		println ("$it: $chain_len")
 	if (max_len < chain_len) {
 		max_len = chain_len

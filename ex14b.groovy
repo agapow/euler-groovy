@@ -5,7 +5,7 @@ between chains.
 
 
 class CollatzGenerator {
-	def cache = [1:1]
+	def cache = [((long) 1):1]
 	
 	// Return the term following ``n``
 	def next_term (long n) {
@@ -18,11 +18,11 @@ class CollatzGenerator {
 	}
 
 	// Return the chain for the term ``x``
-	def chain_len (x) {
+	def chain_len (long x) {
 		def terms = []
 		def cached_len = 0
 		while (true) {
-			cached_len = cache[x]
+			cached_len = this.cache.get (x, false)
 			if (cached_len) {
 				break
 			} else {
@@ -35,9 +35,9 @@ class CollatzGenerator {
 			def term_cnt = terms.size()
 			(0..term_cnt-1).each { i ->
 				def t = terms[i]
-				cache[t] = term_cnt - i + cached_len
+				this.cache[t] = term_cnt - i + cached_len
 			}
-			return cache[terms[0]]
+			return this.cache[terms[0]]
 		
 		} else {
 			return cached_len
