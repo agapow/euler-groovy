@@ -4,9 +4,9 @@ How many ways are there to navigate a 20 by 20 grid?
 
 /*
 Initially this seems very complicated. In an x-by-x grid, you have to make x
-moves to the right and x down ... unless you allow backtracking. So disallow
-backtracking, and we get a permutation of x right and x down moves. How do we
-calculate this?
+moves to the right and x down ... unless you allow backtracking. OK, so we're
+explicitly safe from backtracking, and we get a permutation of x right and x
+down moves. How do we calculate this?
 
 Thanks to `Better explained
 <http://betterexplained.com/articles/navigate-a-grid-using-combinations-and-permutations/>`__
@@ -30,7 +30,11 @@ or for this problem::
 
 */
 
-// for simplicity, a factorial function
+import net.agapow.eulerutils.Utils
+   
+/*
+For simplicity, a factorial function. Note how we coerce everything to BinInteger : compared to Python, Groovy doesn't automatically promote anything.
+*/
 def factorial (BigInteger n) {
 	if (n == 1)
 		return 1
@@ -38,11 +42,14 @@ def factorial (BigInteger n) {
 		return factorial(n-1) * n
 }
 
-// no need to calculate 20! twice
-fac20 = factorial(20)
-soln = factorial(40) / (fac20 * fac20)
-// need type coercion to get integer representation
-println ("Solution is: ${(BigInteger) soln}")
-// => 137846528820
+Utils.timeit {
+	// no need to calculate 20! twice
+	fac20 = factorial(20)
+	soln = factorial(40) / (fac20 * fac20)
+	// need type coercion to get integer representation
+	return ("${(BigInteger) soln}")
+	// => 137846528820 in 67ms
+}
+
 
 
