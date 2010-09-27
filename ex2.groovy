@@ -12,7 +12,7 @@ Utils.timeit {
 		curr_term = a1 + a2
 		if (4000000 <= curr_term)
 			break
-		fibos += [curr_term]
+		fibos << [curr_term]
 		a1 = a2
 		a2 = curr_term
 	}

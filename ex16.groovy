@@ -5,7 +5,7 @@ What is the sum of the digits of the number 2^1000?
 */
 
 /*
-Another oddly simple one: use the Java math library (already included), convert to string, c'est voila.
+Another oddly simple one: use the Java math library (already included), convert to string, and then to an array of ints, add 'em up, c'est voila.
 
 */
 

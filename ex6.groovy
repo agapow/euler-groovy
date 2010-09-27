@@ -14,15 +14,22 @@ natural numbers and the square of the sum.
 
 */
 
+import net.agapow.eulerutils.Utils
 
-sum_of_squares = 0
-square_of_sum = 0
 
-(1..100).each {
-	sum_of_squares += it * it
-	square_of_sum += it
+Utils.timeit {
+	sum_of_squares = 0
+	square_of_sum = 0
+	
+	(1..100).each {
+		sum_of_squares += it * it
+		square_of_sum += it
+	}
+	
+	square_of_sum *= square_of_sum
+	
+	return square_of_sum - sum_of_squares
+	// => 25164150 in 40ms
 }
 
-square_of_sum *= square_of_sum
 
-println "${square_of_sum} - ${sum_of_squares} = ${square_of_sum - sum_of_squares}"

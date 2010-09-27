@@ -11,26 +11,33 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 // are testing all unique combinations), so we
 // are testing all unique combinations
 
-palindromes = []
+import net.agapow.eulerutils.Utils
 
-(100..999).each { i -> 
-	(i..999).each { j ->
-		product = i * j
-		// NOTE: convert string just with interpolation, could also do it with
-		// ``(String)``
-		prod_str = "${product}"
-		// Grab the first & second halves of string, reverse second & compare
-		len = prod_str.size()
-		half = (int) (len / 2)
-		// NOTE: ``substring`` is a little like a python slice - where do you
-		str_a = prod_str.substring (0, half)
-		// start, where do you stop just short of
-		str_b = prod_str.substring (len - half, len).reverse()
-		if (str_a == str_b) {
-			palindromes << product
+Utils.timeit {
+	palindromes = []
+	
+	(100..999).each { i -> 
+		(i..999).each { j ->
+			product = i * j
+			// NOTE: convert string just with interpolation, could also do it with
+			// ``(String)``
+			prod_str = "${product}"
+			// Grab the first & second halves of string, reverse second & compare
+			len = prod_str.size()
+			half = (int) (len / 2)
+			// NOTE: ``substring`` is a little like a python slice - where do you
+			str_a = prod_str.substring (0, half)
+			// start, where do you stop just short of
+			str_b = prod_str.substring (len - half, len).reverse()
+			if (str_a == str_b) {
+				palindromes << product
+			}
 		}
 	}
+	
+	return palindromes.max()
+	// => 906609 in 31396ms
 }
 
-println palindromes.max()
+
 
